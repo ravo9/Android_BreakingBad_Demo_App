@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/row_container"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_badge"
+        android:padding="@dimen/list_item_padding"
+        android:layout_marginStart="@dimen/list_item_margin_horizontal"
+        android:layout_marginEnd="@dimen/list_item_margin_horizontal"
+        android:layout_marginTop="@dimen/list_item_margin_vertical"
+        android:layout_marginBottom="@dimen/list_item_margin_vertical"
+        android:elevation="@dimen/list_item_elevation"
+        android:clipToPadding="false">
+    
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageView_picture"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintWidth_percent="0.35"
+        android:src="@color/colorPrimary"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/data_section"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/data_section"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/list_item_internal_spacing"
+        android:orientation="vertical"
+
+        app:layout_constraintStart_toEndOf="@id/imageView_picture"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_big"/>
+
+        <TextView
+            android:id="@+id/textView_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/list_item_name_nickname_spacing"
+            android:textSize="@dimen/text_size_main"/>
+
+        <TextView
+            android:id="@+id/textView_breakingBadSeasonAppearance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/list_item_nickname_appearance_spacing"
+            android:textSize="@dimen/text_size_main"/>
+
+        <TextView
+            android:id="@+id/textView_betterCallSaulSeasonAppearance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/list_item_nickname_appearance_spacing"
+            android:textSize="@dimen/text_size_main"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

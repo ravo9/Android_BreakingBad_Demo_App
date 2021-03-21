@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="background_badge_padding">3dp</dimen>
+    <dimen name="background_badge_corner_radius">2dp</dimen>
+
+    <dimen name="feed_view_padding_vertical">15dp</dimen>
+
+    <dimen name="text_size_big">16sp</dimen>
+    <dimen name="text_size_main">13sp</dimen>
+
+    <dimen name="list_item_padding">20dp</dimen>
+    <dimen name="list_item_margin_horizontal">20dp</dimen>
+    <dimen name="list_item_margin_vertical">10dp</dimen>
+    <dimen name="list_item_internal_spacing">20dp</dimen>
+    <dimen name="list_item_elevation">2dp</dimen>
+    <dimen name="list_item_thumbnail_length">100dp</dimen>
+    <dimen name="list_item_name_nickname_spacing">8sp</dimen>
+    <dimen name="list_item_nickname_appearance_spacing">12sp</dimen>
+
+    <dimen name="loading_badge_elevation">3dp</dimen>
+    <dimen name="loading_badge_button_elevation">10dp</dimen>
+    <dimen name="loading_badge_text_size_big">20sp</dimen>
+    <dimen name="loading_badge_text_size_medium">18sp</dimen>
+    <dimen name="loading_badge_internal_spacing">30dp</dimen>
+    <dimen name="loading_badge_progressbar_margin">30dp</dimen>
+
+    <dimen name="detailed_view_elevation">10dp</dimen>
+    <dimen name="detailed_view_padding_horizontal">20dp</dimen>
+    <dimen name="detailed_view_padding_top">30dp</dimen>
+    <dimen name="detailed_view_padding_bottom">20dp</dimen>
+    <dimen name="detailed_view_internal_vertical_spacing">20dp</dimen>
+    <dimen name="detailed_view_internal_vertical_bigger_spacing">50dp</dimen>
+    <dimen name="detailed_view_cross_button_length">30dp</dimen>
+    <dimen name="detailed_view_cross_button_margin">10dp</dimen>
+    <dimen name="detailed_view_background_alpha">0.7</dimen>
+
+</resources>

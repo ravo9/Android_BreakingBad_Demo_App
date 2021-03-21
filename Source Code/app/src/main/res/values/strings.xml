@@ -1,0 +1,23 @@
+<resources>
+
+    <string name="app_name">Breaking Bad Demo App</string>
+
+    <string name="loading">Loading…</string>
+    <string name="loading_problem_check_the_internet_connection">Loading problem. Check the Internet connection please.</string>
+    <string name="try_again">Try again</string>
+    <string name="refresh">Refresh</string>
+    <string name="change_order">Change order</string>
+    <string name="close">Close</string>
+    <string name="default_time">0:00:00</string>
+    <string name="view_all">View all</string>
+
+    <string name="breaking_bad_seasons_appearance">Breaking Bad seasons appearance</string>
+    <string name="better_call_saul_seasons_appearance">Better Call Saul seasons appearance</string>
+    <string name="none">none</string>
+    <string name="category">Category</string>
+    <string name="birthday">Birthday</string>
+    <string name="occupations">Occupations</string>
+    <string name="status">Status</string>
+    <string name="portrayed_by">Portrayed by</string>
+
+</resources>
