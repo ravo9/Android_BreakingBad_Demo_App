@@ -124,7 +124,7 @@ class DetailedViewFragment : Fragment(), DataFetchingCallback {
     private fun fetchSelectedCharacter() {
         val selectedCharacterId = this.arguments?.getInt("selectedCharacterId")
         selectedCharacterId?.let {
-            viewModel.fetchSelectedCharacter(this, it)
+            viewModel.getSelectedCharacter(this, it)
         }
     }
 

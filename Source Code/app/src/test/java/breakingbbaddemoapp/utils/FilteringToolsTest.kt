@@ -30,7 +30,7 @@ class FilteringToolsTest {
         val character1 = SimplifiedCharacterObject(0, "John Smith", "Johnny", null, listOf(3), listOf(1, 2, 3))
         val character2 = SimplifiedCharacterObject(1, "John Connery", "J.C.", null, listOf(1, 2), listOf(1))
         val character3 = SimplifiedCharacterObject(2, "Sue Connery", "S.C.", null, listOf(1, 2), listOf(1))
-        val characterList = listOf<SimplifiedCharacterObject>(character1, character2, character3)
+        val characterList = listOf(character1, character2, character3)
 
         // Prepare fake filtering values
         val filterPhrase = null

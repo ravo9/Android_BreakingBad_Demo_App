@@ -14,7 +14,7 @@ import javax.inject.Inject
 class DetailedViewViewModel @Inject constructor(private val apiClient: ApiClient)
     : ViewModel() {
 
-    fun fetchSelectedCharacter(callback: DataFetchingCallback, characterId: Int) {
+    fun getSelectedCharacter(callback: DataFetchingCallback, characterId: Int) {
         apiClient.getSingleCharacterById(characterId).enqueue(object: Callback<List<CompleteCharacterObject>> {
 
             override fun onResponse(call: Call<List<CompleteCharacterObject>>?,
