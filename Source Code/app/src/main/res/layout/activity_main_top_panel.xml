@@ -57,7 +57,7 @@
 
         <Button
                 style="@style/ButtonStyle"
-                android:id="@+id/search_button"
+                android:id="@+id/btn_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/top_panel_internal_spacing"

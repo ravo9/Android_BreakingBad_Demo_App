@@ -4,31 +4,46 @@ import androidx.lifecycle.ViewModel
 import breakingbbaddemoapp.utils.DataFetchingCallback
 import breakingbbaddemoapp.models.SimplifiedCharacterObject
 import breakingbbaddemoapp.network.ApiClient
+import breakingbbaddemoapp.utils.FilteringTools
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
-class FeedViewModel @Inject constructor(private val apiClient: ApiClient)
+class FeedViewModel @Inject constructor(private val apiClient: ApiClient, private val filteringTools: FilteringTools)
     : ViewModel() {
 
-    fun fetchAllCharacters(callback: DataFetchingCallback) {
-        apiClient.getAllCharacters().enqueue(object: Callback<List<SimplifiedCharacterObject>> {
+    private var cachedAllCharactersList: List<SimplifiedCharacterObject>? = null
 
-            override fun onResponse(call: Call<List<SimplifiedCharacterObject>>?,
-                                    response: Response<List<SimplifiedCharacterObject>>?) {
-                response?.let {
-                    if (it.isSuccessful && it.body() != null) {
-                        callback.fetchingSuccessful(it.body()!!)
-                    } else {
-                        callback.fetchingError()
+    fun getCharacters(callback: DataFetchingCallback, filterNamePhrase: String?, filterSeason: Int?) {
+
+        if (cachedAllCharactersList != null) {
+            var results = cachedAllCharactersList!!
+            results = filteringTools.filterResults(results, filterNamePhrase, filterSeason)
+            callback.fetchingSuccessful(results)
+        } else {
+            apiClient.getAllCharacters().enqueue(object: Callback<List<SimplifiedCharacterObject>> {
+
+                override fun onResponse(call: Call<List<SimplifiedCharacterObject>>?,
+                                        response: Response<List<SimplifiedCharacterObject>>?
+                ) {
+                    response?.let {
+                        if (it.isSuccessful && it.body() != null) {
+                            cachedAllCharactersList = it.body()
+
+                            var results = it.body()!!
+                            results = filteringTools.filterResults(results, filterNamePhrase, filterSeason)
+                            callback.fetchingSuccessful(results)
+                        } else {
+                            callback.fetchingError()
+                        }
                     }
                 }
-            }
 
-            override fun onFailure(call: Call<List<SimplifiedCharacterObject>>?, t: Throwable?) {
-                callback.fetchingError()
-            }
-        })
+                override fun onFailure(call: Call<List<SimplifiedCharacterObject>>?, t: Throwable?) {
+                    callback.fetchingError()
+                }
+            })
+        }
     }
 }

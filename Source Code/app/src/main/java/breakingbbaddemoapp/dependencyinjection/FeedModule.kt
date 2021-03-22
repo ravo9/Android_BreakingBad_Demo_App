@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import breakingbbaddemoapp.network.ApiClient
 import breakingbbaddemoapp.network.ApiClientBuilder
+import breakingbbaddemoapp.utils.FilteringTools
 import breakingbbaddemoapp.utils.StringFormatter
 import javax.inject.Singleton
 
@@ -20,5 +21,11 @@ class FeedModule {
     @Singleton
     fun providesStringFormatter(): StringFormatter {
         return StringFormatter()
+    }
+
+    @Provides
+    @Singleton
+    fun providesFilteringTools(): FilteringTools {
+        return FilteringTools()
     }
 }

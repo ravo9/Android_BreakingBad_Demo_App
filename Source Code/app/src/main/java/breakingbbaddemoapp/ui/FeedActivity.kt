@@ -13,6 +13,7 @@ import breakingbbaddemoapp.dependencyinjection.BreakingBadDemoApp
 import breakingbbaddemoapp.models.SimplifiedCharacterObject
 import breakingbbaddemoapp.viewmodels.FeedViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main_top_panel.*
 import kotlinx.android.synthetic.main.loading_badge.*
 import javax.inject.Inject
 
@@ -24,6 +25,7 @@ class FeedActivity : AppCompatActivity(), DataFetchingCallback {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: FeedViewModel
 
+    private val STATE_FILTERING_IN_PROGRESS = "STATE_FILTERING_IN_PROGRESS"
     private val STATE_LOADING_ERROR = "STATE_LOADING_ERROR"
     private val STATE_CONTENT_LOADED = "STATE_CONTENT_LOADED"
 
@@ -41,6 +43,9 @@ class FeedActivity : AppCompatActivity(), DataFetchingCallback {
         // Initialize RecyclerView (feed items)
         setupRecyclerView()
 
+        // Initialize Search Bar
+        setupSearchBar()
+
         // Fetch feed items from the back-end and load them into the view
         fetchCharacters()
     }
@@ -50,6 +55,14 @@ class FeedActivity : AppCompatActivity(), DataFetchingCallback {
         main_feed_recyclerview.layoutManager = layoutManager
         main_feed_recyclerview.adapter = CharactersListAdapter(this) { selectedCharacterId: Int ->
             displayDetailedView(selectedCharacterId)
+        }
+    }
+
+    private fun setupSearchBar() {
+        btn_search.setOnClickListener {
+            val searchNamePhrase = search_engine.text.toString()
+            setViewState(STATE_FILTERING_IN_PROGRESS)
+            updateCharacters(searchNamePhrase, null)
         }
     }
 
@@ -66,7 +79,11 @@ class FeedActivity : AppCompatActivity(), DataFetchingCallback {
     }
 
     private fun fetchCharacters() {
-        viewModel.fetchAllCharacters(this)
+        viewModel.getCharacters(this, null, null)
+    }
+
+    private fun updateCharacters(filterNamePhrase: String?, filterSeason: Int?) {
+        viewModel.getCharacters(this, filterNamePhrase, filterSeason)
     }
 
     private fun loadItemsIntoList(items: List<SimplifiedCharacterObject>) {
@@ -77,7 +94,6 @@ class FeedActivity : AppCompatActivity(), DataFetchingCallback {
         val builder = AlertDialog.Builder(this)
         builder.setTitle(R.string.loading_problem_check_the_internet_connection)
         builder.setPositiveButton(R.string.try_again) { _, _ ->
-//            fetchCharacters()
             tryAgainAction()
         }
         builder.create().show()
@@ -85,9 +101,14 @@ class FeedActivity : AppCompatActivity(), DataFetchingCallback {
 
     private fun setViewState(state: String) {
         when(state) {
+            STATE_FILTERING_IN_PROGRESS -> setupLoadingView()
             STATE_LOADING_ERROR -> setupLoadingErrorView()
             STATE_CONTENT_LOADED -> setupContentLoadedView()
         }
+    }
+
+    private fun setupLoadingView() {
+        btn_search.isEnabled = false
     }
 
     private fun setupLoadingErrorView() {
@@ -98,6 +119,7 @@ class FeedActivity : AppCompatActivity(), DataFetchingCallback {
 
     private fun setupContentLoadedView() {
         loading_container.visibility = View.GONE
+        btn_search.isEnabled = true
     }
 
 
