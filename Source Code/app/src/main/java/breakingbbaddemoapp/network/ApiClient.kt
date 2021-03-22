@@ -1,5 +1,6 @@
 package breakingbbaddemoapp.network
 
+import breakingbbaddemoapp.constants.NetworkConstants
 import breakingbbaddemoapp.models.CompleteCharacterObject
 import retrofit2.Call
 import retrofit2.http.GET

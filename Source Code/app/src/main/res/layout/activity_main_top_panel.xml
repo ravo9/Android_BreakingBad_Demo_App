@@ -55,6 +55,12 @@
 
         </RelativeLayout>
 
+        <Spinner
+            android:id="@+id/seasons_dropdown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/top_panel_internal_spacing" />
+
         <Button
                 style="@style/ButtonStyle"
                 android:id="@+id/btn_search"

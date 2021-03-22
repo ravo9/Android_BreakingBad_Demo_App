@@ -1,5 +1,6 @@
 package breakingbbaddemoapp.utils
 
+import breakingbbaddemoapp.constants.SeriesSpecificConstants
 import breakingbbaddemoapp.models.SimplifiedCharacterObject
 
 class FilteringTools {
@@ -8,8 +9,8 @@ class FilteringTools {
                       filterNamePhrase: String?,
                       filterSeason: Int?
     ): List<SimplifiedCharacterObject> {
-        return filterResultsByName(list, filterNamePhrase)
-//        filterResultsBySeason(list, filterSeason)
+        val newList = filterResultsByName(list, filterNamePhrase)
+        return filterResultsBySeason(newList, filterSeason)
     }
 
     private fun filterResultsByName(list: List<SimplifiedCharacterObject>,
@@ -22,13 +23,18 @@ class FilteringTools {
         }
     }
 
-//    private fun filterResultsBySeason(list: List<SimplifiedCharacterObject>,
-//                                      filterSeason: Int?
-//    ): List<SimplifiedCharacterObject> {
-//        if (filterSeason != null) {
-//            return list.filter { it.app.contains(filterNamePhrase) }
-//        } else {
-//            return list
-//        }
-//    }
+    private fun filterResultsBySeason(list: List<SimplifiedCharacterObject>,
+                                      filterSeason: Int?
+    ): List<SimplifiedCharacterObject> {
+        if (filterSeason != null && filterSeason != 0) {
+            if (filterSeason > SeriesSpecificConstants.NUMBER_OF_LAST_BREAKING_BAD_SEASON_EVER_CREATED) {
+                val betterCallSaulSeasonNumber = filterSeason - SeriesSpecificConstants.NUMBER_OF_LAST_BREAKING_BAD_SEASON_EVER_CREATED
+                return list.filter { it.betterCallSaulSeasonAppearance.contains(betterCallSaulSeasonNumber) }
+            } else {
+                return list.filter { it.breakingBadSeasonAppearance.contains(filterSeason) }
+            }
+        } else {
+            return list
+        }
+    }
 }

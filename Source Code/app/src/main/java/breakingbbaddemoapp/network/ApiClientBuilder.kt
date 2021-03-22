@@ -1,5 +1,6 @@
 package breakingbbaddemoapp.network
 
+import breakingbbaddemoapp.constants.NetworkConstants
 import okhttp3.OkHttpClient.Builder
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory

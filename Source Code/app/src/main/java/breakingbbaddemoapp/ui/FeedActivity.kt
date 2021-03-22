@@ -3,11 +3,13 @@ package breakingbbaddemoapp.ui
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import breakingbbaddemoapp.R
+import breakingbbaddemoapp.constants.SeriesSpecificConstants
 import breakingbbaddemoapp.utils.DataFetchingCallback
 import breakingbbaddemoapp.dependencyinjection.BreakingBadDemoApp
 import breakingbbaddemoapp.models.SimplifiedCharacterObject
@@ -43,12 +45,15 @@ class FeedActivity : AppCompatActivity(), DataFetchingCallback {
         // Initialize RecyclerView (feed items)
         setupRecyclerView()
 
-        // Initialize Search Bar
-        setupSearchBar()
+        // Initialize Search Panel
+        setupSearchPanel()
 
         // Fetch feed items from the back-end and load them into the view
         fetchCharacters()
     }
+
+
+    // UI setup methods
 
     private fun setupRecyclerView() {
         val layoutManager = LinearLayoutManager(this)
@@ -58,13 +63,39 @@ class FeedActivity : AppCompatActivity(), DataFetchingCallback {
         }
     }
 
-    private fun setupSearchBar() {
+    private fun setupSeasonDropdown() {
+        val itemZero = getString(R.string.all_seasons)
+        val breakingBadItems = ArrayList<String>()
+        for (seasonNumber in 1 .. SeriesSpecificConstants.NUMBER_OF_LAST_BREAKING_BAD_SEASON_EVER_CREATED) {
+            val stringItem = getString(R.string.breaking_bad_season) + ' ' + seasonNumber
+            breakingBadItems.add(stringItem)
+        }
+        val betterCallSaulItems = ArrayList<String>()
+        for (seasonNumber in 1 .. SeriesSpecificConstants.NUMBER_OF_LAST_BETTER_CALL_SAUL_EVER_CREATED) {
+            val stringItem = getString(R.string.better_call_saul_season) + ' ' + seasonNumber
+            betterCallSaulItems.add(stringItem)
+        }
+        val dropDownItems = ArrayList<String>()
+        dropDownItems.add(itemZero)
+        dropDownItems.addAll(breakingBadItems)
+        dropDownItems.addAll(betterCallSaulItems)
+        val dropDownAdapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, dropDownItems)
+        seasons_dropdown.adapter = dropDownAdapter
+    }
+
+    private fun setupSearchPanel() {
+        setupSeasonDropdown()
+
         btn_search.setOnClickListener {
             val searchNamePhrase = search_engine.text.toString()
+            val seasonNumber = seasons_dropdown.selectedItemPosition
             setViewState(STATE_FILTERING_IN_PROGRESS)
-            updateCharacters(searchNamePhrase, null)
+            updateCharacters(searchNamePhrase, seasonNumber)
         }
     }
+
+
+    // UI management methods
 
     private fun displayDetailedView(selectedCharacterId: Int) {
         val fragment = DetailedViewFragment()
@@ -76,14 +107,6 @@ class FeedActivity : AppCompatActivity(), DataFetchingCallback {
         fragmentTransaction.add(R.id.main_content_container, fragment)
             .addToBackStack(null)
             .commit()
-    }
-
-    private fun fetchCharacters() {
-        viewModel.getCharacters(this, null, null)
-    }
-
-    private fun updateCharacters(filterNamePhrase: String?, filterSeason: Int?) {
-        viewModel.getCharacters(this, filterNamePhrase, filterSeason)
     }
 
     private fun loadItemsIntoList(items: List<SimplifiedCharacterObject>) {
@@ -120,6 +143,17 @@ class FeedActivity : AppCompatActivity(), DataFetchingCallback {
     private fun setupContentLoadedView() {
         loading_container.visibility = View.GONE
         btn_search.isEnabled = true
+    }
+
+
+    // Data fetching methods
+
+    private fun fetchCharacters() {
+        viewModel.getCharacters(this, null, null)
+    }
+
+    private fun updateCharacters(filterNamePhrase: String?, filterSeason: Int?) {
+        viewModel.getCharacters(this, filterNamePhrase, filterSeason)
     }
 
 

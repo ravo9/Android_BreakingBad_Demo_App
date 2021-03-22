@@ -58,12 +58,8 @@ class DetailedViewFragment : Fragment(), DataFetchingCallback {
         spacing_bottom.setOnClickListener(closingOnClickListener)
     }
 
-    private fun fetchSelectedCharacter() {
-        val selectedCharacterId = this.arguments?.getInt("selectedCharacterId")
-        selectedCharacterId?.let {
-            viewModel.fetchSelectedCharacter(this, it)
-        }
-    }
+
+    // UI setup methods
 
     private fun setViewState(state: String, characterObject: CompleteCharacterObject? = null) {
         when(state) {
@@ -119,6 +115,16 @@ class DetailedViewFragment : Fragment(), DataFetchingCallback {
                 it.getString(R.string.portrayed_by),
                 characterObject.portrayed
             )
+        }
+    }
+
+
+    // Data fetching methods
+
+    private fun fetchSelectedCharacter() {
+        val selectedCharacterId = this.arguments?.getInt("selectedCharacterId")
+        selectedCharacterId?.let {
+            viewModel.fetchSelectedCharacter(this, it)
         }
     }
 
