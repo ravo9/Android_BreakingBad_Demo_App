@@ -1,6 +1,8 @@
 package breakingbbaddemoapp.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import breakingbbaddemoapp.constants.LogTags
 import breakingbbaddemoapp.utils.DataFetchingCallback
 import breakingbbaddemoapp.models.SimplifiedCharacterObject
 import breakingbbaddemoapp.network.ApiClient
@@ -36,12 +38,18 @@ class FeedViewModel @Inject constructor(private val apiClient: ApiClient, privat
                             callback.fetchingSuccessful(results)
                         } else {
                             callback.fetchingError()
+                            it.errorBody()?.let {
+                                Log.e(LogTags.NETWORK_ERROR, it.string())
+                            }
                         }
                     }
                 }
 
                 override fun onFailure(call: Call<List<SimplifiedCharacterObject>>?, t: Throwable?) {
                     callback.fetchingError()
+                    t?.let {
+                        Log.e(LogTags.NETWORK_ERROR, it.message)
+                    }
                 }
             })
         }
