@@ -19,5 +19,7 @@
     <string name="occupations">Occupations</string>
     <string name="status">Status</string>
     <string name="portrayed_by">Portrayed by</string>
+    <string name="search">Search</string>
+    <string name="use_the_search_bar_to_find">Use the search bar to find a character by name - or the dropdown list in order to filter characters by season</string>
 
 </resources>

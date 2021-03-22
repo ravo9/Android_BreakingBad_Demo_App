@@ -9,6 +9,8 @@
     <dimen name="text_size_big">16sp</dimen>
     <dimen name="text_size_main">13sp</dimen>
 
+    <dimen name="elevation_standard">2dp</dimen>
+
     <dimen name="list_item_padding">20dp</dimen>
     <dimen name="list_item_margin_horizontal">20dp</dimen>
     <dimen name="list_item_margin_vertical">10dp</dimen>
@@ -34,5 +36,13 @@
     <dimen name="detailed_view_cross_button_length">30dp</dimen>
     <dimen name="detailed_view_cross_button_margin">10dp</dimen>
     <dimen name="detailed_view_background_alpha">0.7</dimen>
+
+    <dimen name="top_panel_padding">30dp</dimen>
+    <dimen name="top_panel_internal_spacing">20dp</dimen>
+    <dimen name="top_panel_search_bar_padding_start">42dp</dimen>
+    <dimen name="top_panel_search_bar_height">35dp</dimen>
+    <dimen name="top_panel_search_bar_icon_length">28dp</dimen>
+    <dimen name="top_panel_search_bar_icon_margin_start">8dp</dimen>
+    <dimen name="top_panel_search_button_pa">8dp</dimen>
 
 </resources>

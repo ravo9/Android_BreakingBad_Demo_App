@@ -19,8 +19,8 @@ class CharactersListAdapter(val context: Context,
 
     private var items: List<SimplifiedCharacterObject> = ArrayList()
 
-    fun setItems(sections: List<SimplifiedCharacterObject>) {
-        this.items = sections
+    fun setItems(items: List<SimplifiedCharacterObject>) {
+        this.items = items
         notifyDataSetChanged()
     }
 
@@ -30,8 +30,8 @@ class CharactersListAdapter(val context: Context,
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val sectionView = inflater.inflate(R.layout.main_feed_list_item, parent, false)
-        return ItemViewHolder(sectionView)
+        val view = inflater.inflate(R.layout.main_feed_list_item, parent, false)
+        return ItemViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

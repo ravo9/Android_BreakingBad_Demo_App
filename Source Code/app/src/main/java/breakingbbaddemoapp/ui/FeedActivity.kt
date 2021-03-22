@@ -60,7 +60,7 @@ class FeedActivity : AppCompatActivity(), DataFetchingCallback {
         fragment.arguments = bundle
 
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.main_container, fragment)
+        fragmentTransaction.add(R.id.main_content_container, fragment)
             .addToBackStack(null)
             .commit()
     }

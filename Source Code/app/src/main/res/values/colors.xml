@@ -5,7 +5,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="colorBackground">#F4F3F5</color>
+    <color name="colorBackground">#FFF</color>
     <color name="colorBackgroundAlternative">#000</color>
 
     <color name="colorTextMain">#1E0F35</color>
